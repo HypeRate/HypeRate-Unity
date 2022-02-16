@@ -10,8 +10,8 @@ using NativeWebSocket;
 public class hyperateSocket : MonoBehaviour
 {
 	// Put your websocket Token ID here
-    public string websocketToken = "z5CAzTmsKwpVgafiTUG2jHUT8rJdSeR6Kzyx3h6yFsi4kJRyZEdk8wt2aorJYc9N";
-
+    public string websocketToken = "<Request your Websocket Token>"; //You don't have one, get it here https://discord.gg/75jcqvuHAH
+    public string hyperateID = "internal-testing";
 	// Textbox to display your heart rate in
     Text textBox;
 	// Websocket for connection with Hyperate
@@ -20,7 +20,7 @@ public class hyperateSocket : MonoBehaviour
     {
         textBox = GetComponent<Text>();
 
-        websocket = new WebSocket("wss://staging.frightrate.com/socket/websocket?token=" + websocketToken);
+        websocket = new WebSocket("wss://app.hyperate.io/socket/websocket?token=" + websocketToken);
         Debug.Log("Connect!");
 
         websocket.OnOpen += () =>
@@ -71,7 +71,7 @@ public class hyperateSocket : MonoBehaviour
         if (websocket.State == WebSocketState.Open)
         {
             // Log into the "internal-testing" channel
-            await websocket.SendText("{\"topic\": \"hr:internal-testing\", \"event\": \"phx_join\", \"payload\": {}, \"ref\": 0}");
+            await websocket.SendText("{\"topic\": \"hr:"+hyperateID+"\", \"event\": \"phx_join\", \"payload\": {}, \"ref\": 0}");
         }
     }
     async void SendHeartbeat()
