@@ -52,8 +52,8 @@ public class hyperateSocket : MonoBehaviour
             }
         };
 
-        // Send heartbeat message every 25seconds in order to not suspended the connection
-        InvokeRepeating("SendHeartbeat", 1.0f, 25.0f);
+        // Send heartbeat message every 10 seconds in order to not suspended the connection
+        InvokeRepeating("SendHeartbeat", 1.0f, 10.0f);
 
         // waiting for messages
         await websocket.Connect();
