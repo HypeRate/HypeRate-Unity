@@ -17,6 +17,9 @@ namespace HypeRate
 
         private Channels _channels = new();
 
+        public delegate void OnMessageReceived(string result);
+        public OnMessageReceived onMessageReceivedCallback;
+
         public static HypeRate GetInstance()
         {
             if (_instance == null)
@@ -39,24 +42,6 @@ namespace HypeRate
                 await SendMessage(Network.GetJoinPacket(channelName, refArg));
             }
             CreateMessageReciever();
-            /*webSocket.OnMessage += (bytes) =>
-            {
-                // getting the message as a string
-                var message = System.Text.Encoding.UTF8.GetString(bytes);
-                /*
-                var dataPackage = JsonUtility.FromJson<HypeRateDataPackage>(message);
-                Debug.Log(dataPackage);
-
-                if (dataPackage.@event == "hr_update")
-                {
-                    // Change textbox text into the newly received Heart Rate (integer like "86" which represents beats per minute)
-                    textBox.text = dataPackage.payload.hr;
-                }
-            };*/
-
-            // Send heartbeat message every 10 seconds in order to not suspended the connection
-            //InvokeRepeating("SendHeartbeat", 1.0f, 10.0f);
-
         }
 
         private void CreateMessageReciever()
@@ -72,6 +57,12 @@ namespace HypeRate
                         result = await webSocket.ReceiveAsync(buffer, CancellationToken.None);
                         string message = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
                         Debug.Log("Received message: " + message);
+                        try {
+                            onMessageReceivedCallback(message);
+                        }
+                        catch (Exception) {
+                            // do nothing
+                        }
                     }
                     while (!result.EndOfMessage);
                 }

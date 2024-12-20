@@ -37,35 +37,23 @@ public class Example : MonoBehaviour
 
     async void Start()
     {
-        textBox = GetComponent<TextMeshProUGUI>();
+        textBox = GetComponent<TMP_Text>();
 
         hypeRateSocket = HypeRate.HypeRate.GetInstance();
+        // connect to the hyperate server
         await hypeRateSocket.ConnectToServer(websocketToken, hyperateURL);
-
-        Debug.Log("poop");
+        // join the heartbeat channel, to receive heartbeat events
         await hypeRateSocket.JoinHeartbeatChannel(hyperateID);
 
+        // add function to the message received callback, to do something useful
+        hypeRateSocket.onMessageReceivedCallback = this.ChangeText;
+    }
 
-        /*
+    private void ChangeText(string message)
+    {
+        HypeRateDataPackage datapackage = JsonUtility.FromJson<HypeRateDataPackage>(message);
+        GetComponent<TextMesh>().text = datapackage.payload.hr;
 
-        websocket.OnMessage += (bytes) =>
-        {
-        // getting the message as a string
-            var message = System.Text.Encoding.UTF8.GetString(bytes);
-
-            var dataPackage = JsonUtility.FromJson<HypeRateDataPackage>(message);
-            Debug.Log(dataPackage);
-
-            if (dataPackage.@event == "hr_update")
-            {
-                // Change textbox text into the newly received Heart Rate (integer like "86" which represents beats per minute)
-                textBox.text = dataPackage.payload.hr;
-            }
-        };
-
-        // Send heartbeat message every 10 seconds in order to not suspended the connection
-        InvokeRepeating("SendHeartbeat", 1.0f, 10.0f);
-        */
     }
 
     private async void OnApplicationQuit()
