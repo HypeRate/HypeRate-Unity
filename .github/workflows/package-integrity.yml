@@ -1,0 +1,23 @@
+name: Package integrity
+
+on:
+  push:
+    branches:
+      - master
+      - "codex/**"
+    tags:
+      - "v*"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate Unity package
+        run: ./ReleaseTools/validate-package.sh

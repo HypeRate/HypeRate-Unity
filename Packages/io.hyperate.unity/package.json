@@ -1,0 +1,41 @@
+{
+  "name": "io.hyperate.unity",
+  "version": "2.0.0-pre.1",
+  "displayName": "HypeRate for Unity",
+  "description": "A developer-friendly Unity integration for real-time HypeRate heart-rate data.",
+  "unity": "2022.3",
+  "unityRelease": "0f1",
+  "author": {
+    "name": "HypeRate",
+    "url": "https://hyperate.io"
+  },
+  "license": "MIT",
+  "documentationUrl": "https://github.com/HypeRate/HypeRate-Unity/blob/master/Packages/io.hyperate.unity/Documentation~/getting-started.md",
+  "changelogUrl": "https://github.com/HypeRate/HypeRate-Unity/blob/master/Packages/io.hyperate.unity/CHANGELOG.md",
+  "licensesUrl": "https://github.com/HypeRate/HypeRate-Unity/blob/master/Packages/io.hyperate.unity/LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HypeRate/HypeRate-Unity.git",
+    "directory": "Packages/io.hyperate.unity"
+  },
+  "keywords": [
+    "hyperate",
+    "heart-rate",
+    "websocket",
+    "health",
+    "streaming"
+  ],
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Basic Usage",
+      "description": "Logs live heart-rate updates and demonstrates the public API.",
+      "path": "Samples~/BasicUsage"
+    },
+    {
+      "displayName": "Heart Rate Widget",
+      "description": "A clean, ready-to-run BPM card with history graph and built-in simulation.",
+      "path": "Samples~/HeartRateWidget"
+    }
+  ]
+}
