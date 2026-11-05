@@ -1,0 +1,16 @@
+{
+  "name": "HypeRate.SDK.Samples.PulseLab",
+  "rootNamespace": "HypeRate.SDK.Samples",
+  "references": [
+    "HypeRate.SDK"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

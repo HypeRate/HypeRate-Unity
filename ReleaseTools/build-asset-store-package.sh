@@ -39,7 +39,7 @@ mkdir -p \
 
 cp -R "$PACKAGE_ROOT/Runtime" "$STAGING_PROJECT/Assets/HypeRate/Runtime"
 cp -R "$PACKAGE_ROOT/Editor" "$STAGING_PROJECT/Assets/HypeRate/Editor"
-cp -R "$PACKAGE_ROOT/Samples~/BasicUsage" "$STAGING_PROJECT/Assets/HypeRate/Samples/BasicUsage"
+cp -R "$PACKAGE_ROOT/Samples~/". "$STAGING_PROJECT/Assets/HypeRate/Samples/"
 cp -R "$PACKAGE_ROOT/Documentation~/". "$STAGING_PROJECT/Assets/HypeRate/Documentation/"
 cp "$PACKAGE_ROOT/README.md" "$STAGING_PROJECT/Assets/HypeRate/Documentation/README.md"
 cp "$PACKAGE_ROOT/Third Party Notices.md" "$STAGING_PROJECT/Assets/HypeRate/Documentation/Third Party Notices.md"

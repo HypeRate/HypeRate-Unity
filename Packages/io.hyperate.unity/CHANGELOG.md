@@ -6,6 +6,10 @@
 - Added the HypeRate setup window and custom client Inspector.
 - Added automatic channel join, heartbeat, reconnect, and main-thread callbacks.
 - Added Unity Events and typed C# events for heart-rate updates.
+- Added an Editor-friendly heart-rate simulator with Resting, Workout, Intense,
+  and Custom profiles.
+- Added the optional Pulse Lab 3D sample, with visuals and controls driven by the
+  same events used for live HypeRate data.
 - Added Editor-only test credential handling, runtime configuration, documentation,
   sample code, and protocol tests.
 - Changed the public namespace to `HypeRate.SDK`.

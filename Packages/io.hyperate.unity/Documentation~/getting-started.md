@@ -50,6 +50,21 @@ public sealed class HeartRateExample : MonoBehaviour
 
 The client automatically joins the configured heart-rate channel, sends Phoenix heartbeats, reconnects with exponential backoff, and dispatches callbacks on Unity's main thread.
 
+## Develop without a device
+
+Add `HypeRateSimulator` next to a `HypeRateClient` to produce realistic test
+values in Play Mode. Resting, Workout, Intense and Custom profiles publish
+through the client's normal `HeartRateChanged` event and Unity Event, so gameplay
+code does not need a separate test path.
+
+```csharp
+var simulator = gameObject.AddComponent<HypeRateSimulator>();
+simulator.StartSimulation();
+```
+
+The optional **Pulse Lab** Package Manager sample demonstrates the same workflow
+in a ready-to-run 3D scene.
+
 ## Editor test credentials
 
 The setup window creates

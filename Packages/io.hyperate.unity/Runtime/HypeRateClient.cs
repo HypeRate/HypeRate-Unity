@@ -40,6 +40,7 @@ namespace HypeRate.SDK
         private bool intentionalDisconnect;
         private bool quitting;
         private bool destroyed;
+        private bool simulationActive;
         private bool disconnectEventRaised = true;
         private int connectionGeneration;
         private int reconnectAttempt;
@@ -57,7 +58,8 @@ namespace HypeRate.SDK
         public HypeRateConnectionState State { get; private set; } = HypeRateConnectionState.Disconnected;
         public int CurrentHeartRate { get; private set; }
         public string LastError { get; private set; } = string.Empty;
-        public bool IsConnected => State == HypeRateConnectionState.Connected;
+        public bool IsConnected => State == HypeRateConnectionState.Connected || simulationActive;
+        public bool IsSimulating => simulationActive;
         public HeartRateUnityEvent OnHeartRateChanged => onHeartRateChanged;
         public UnityEvent OnConnected => onConnected;
         public UnityEvent OnDisconnected => onDisconnected;
@@ -96,6 +98,72 @@ namespace HypeRate.SDK
             runtimeEndpoint = HypeRateSettings.DefaultEndpoint;
         }
 
+        public void BeginSimulation(int initialHeartRate = 72)
+        {
+            if (initialHeartRate <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(initialHeartRate), "Heart rate must be greater than zero.");
+            }
+
+            if (destroyed || quitting)
+            {
+                return;
+            }
+
+            var wasConnected = socket != null || simulationActive || !disconnectEventRaised;
+            intentionalDisconnect = true;
+            connectionGeneration++;
+            StopHeartbeatRoutine();
+            StopReconnectRoutine();
+
+            var currentSocket = socket;
+            socket = null;
+            currentSocket?.CancelConnection();
+            currentSocket?.Dispose();
+
+            if (wasConnected)
+            {
+                RaiseDisconnectedOnce();
+            }
+
+            simulationActive = true;
+            intentionalDisconnect = false;
+            disconnectEventRaised = false;
+            LastError = string.Empty;
+            SetState(HypeRateConnectionState.Simulating);
+            Connected?.Invoke();
+            onConnected.Invoke();
+            SetSimulatedHeartRate(initialHeartRate);
+        }
+
+        public void SetSimulatedHeartRate(int heartRate)
+        {
+            if (!simulationActive)
+            {
+                throw new InvalidOperationException("Call BeginSimulation before sending simulated heart-rate values.");
+            }
+
+            if (heartRate <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(heartRate), "Heart rate must be greater than zero.");
+            }
+
+            PublishHeartRate(heartRate);
+        }
+
+        public void EndSimulation()
+        {
+            if (!simulationActive)
+            {
+                return;
+            }
+
+            simulationActive = false;
+            CurrentHeartRate = 0;
+            SetState(HypeRateConnectionState.Disconnected);
+            RaiseDisconnectedOnce();
+        }
+
         private void Start()
         {
             if (connectOnStart)
@@ -116,6 +184,7 @@ namespace HypeRate.SDK
         {
             destroyed = true;
             intentionalDisconnect = true;
+            simulationActive = false;
             connectionGeneration++;
             StopHeartbeatRoutine();
             StopReconnectRoutine();
@@ -130,6 +199,7 @@ namespace HypeRate.SDK
         {
             quitting = true;
             intentionalDisconnect = true;
+            simulationActive = false;
             connectionGeneration++;
             StopHeartbeatRoutine();
             StopReconnectRoutine();
@@ -155,6 +225,11 @@ namespace HypeRate.SDK
             if (socket != null && (socket.IsOpen || socket.IsConnecting))
             {
                 return;
+            }
+
+            if (simulationActive)
+            {
+                EndSimulation();
             }
 
             if (!TryResolveConfiguration(out var configuration, out var configurationError))
@@ -210,6 +285,12 @@ namespace HypeRate.SDK
             intentionalDisconnect = true;
             StopReconnectRoutine();
             StopHeartbeatRoutine();
+
+            if (simulationActive)
+            {
+                EndSimulation();
+                return;
+            }
 
             var currentSocket = socket;
             socket = null;
@@ -292,6 +373,11 @@ namespace HypeRate.SDK
                 return;
             }
 
+            PublishHeartRate(heartRate);
+        }
+
+        private void PublishHeartRate(int heartRate)
+        {
             CurrentHeartRate = heartRate;
             HeartRateChanged?.Invoke(heartRate);
             onHeartRateChanged.Invoke(heartRate);
@@ -544,6 +630,7 @@ namespace HypeRate.SDK
             destroyed = false;
             quitting = false;
             intentionalDisconnect = false;
+            simulationActive = false;
             disconnectEventRaised = true;
             reconnectAttempt = 0;
             CurrentHeartRate = 0;

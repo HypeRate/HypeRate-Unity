@@ -5,6 +5,7 @@ namespace HypeRate.SDK
         Disconnected,
         Connecting,
         Connected,
+        Simulating,
         Reconnecting,
         Disconnecting,
         Error

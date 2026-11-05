@@ -31,6 +31,11 @@
       "displayName": "Basic Usage",
       "description": "Logs live heart-rate updates and demonstrates the public API.",
       "path": "Samples~/BasicUsage"
+    },
+    {
+      "displayName": "Pulse Lab",
+      "description": "A polished 3D showcase with live data and built-in heart-rate simulation.",
+      "path": "Samples~/PulseLab"
     }
   ]
 }

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using UnityEngine;
 
 namespace HypeRate.SDK.Tests
 {
@@ -31,6 +32,44 @@ namespace HypeRate.SDK.Tests
             StringAssert.Contains("hr:test\\\\\\\"device", json);
             StringAssert.Contains("phx_join", json);
             StringAssert.Contains("42", json);
+        }
+
+        [Test]
+        public void SimulationUsesTheNormalClientEvents()
+        {
+            var gameObject = new GameObject("HypeRate simulation test");
+
+            try
+            {
+                var client = gameObject.AddComponent<HypeRateClient>();
+                var receivedHeartRate = 0;
+                var connected = false;
+                var disconnected = false;
+                client.HeartRateChanged += value => receivedHeartRate = value;
+                client.Connected += () => connected = true;
+                client.Disconnected += () => disconnected = true;
+
+                client.BeginSimulation(84);
+
+                Assert.That(client.State, Is.EqualTo(HypeRateConnectionState.Simulating));
+                Assert.That(client.IsConnected, Is.True);
+                Assert.That(client.IsSimulating, Is.True);
+                Assert.That(client.CurrentHeartRate, Is.EqualTo(84));
+                Assert.That(receivedHeartRate, Is.EqualTo(84));
+                Assert.That(connected, Is.True);
+
+                client.SetSimulatedHeartRate(132);
+                Assert.That(receivedHeartRate, Is.EqualTo(132));
+
+                client.EndSimulation();
+                Assert.That(client.State, Is.EqualTo(HypeRateConnectionState.Disconnected));
+                Assert.That(client.IsConnected, Is.False);
+                Assert.That(disconnected, Is.True);
+            }
+            finally
+            {
+                Object.DestroyImmediate(gameObject);
+            }
         }
     }
 }
