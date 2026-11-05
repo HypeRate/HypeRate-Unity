@@ -69,6 +69,8 @@ Its connection indicator uses red for offline or errors, yellow while connecting
 or reconnecting, green for live data, and blue for simulated data. The setup
 window and custom client Inspector use the same status colors.
 
+![Heart Rate Widget receiving live HypeRate data](images/heart-rate-widget.png)
+
 ## Editor test credentials
 
 The setup window creates
