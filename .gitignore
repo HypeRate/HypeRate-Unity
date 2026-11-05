@@ -75,3 +75,11 @@ Assets/.DS_Store
 .DS_Store
 Assets/.DS_Store
 Assets/HypeRate/.DS_Store
+
+# Local HypeRate credentials
+/Assets/HypeRateGenerated/
+/Assets/HypeRateGenerated.meta
+
+# Local editor files
+.vscode/
+*.slnx
