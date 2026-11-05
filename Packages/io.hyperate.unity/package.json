@@ -33,9 +33,9 @@
       "path": "Samples~/BasicUsage"
     },
     {
-      "displayName": "Pulse Lab",
-      "description": "A polished 3D showcase with live data and built-in heart-rate simulation.",
-      "path": "Samples~/PulseLab"
+      "displayName": "Heart Rate Widget",
+      "description": "A clean, ready-to-run BPM card with history graph and built-in simulation.",
+      "path": "Samples~/HeartRateWidget"
     }
   ]
 }

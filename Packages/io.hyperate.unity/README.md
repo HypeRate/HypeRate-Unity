@@ -23,13 +23,19 @@ client.HeartRateChanged += heartRate =>
 
 ## Try it without a device
 
-Import the **Pulse Lab** sample from Package Manager and press Play. Its built-in
-simulator drives the same client state and heart-rate events as a live connection,
-so UI, animation, audio and game logic can be developed without wearing a sensor.
+Import the **Heart Rate Widget** sample from Package Manager and press Play. Its
+built-in simulator drives the same client state and heart-rate events as a live
+connection, so UI and game logic can be developed without wearing a sensor.
 
 For a small custom test scene, add both **HypeRate Client** and **HypeRate
 Simulator** to one GameObject. Choose a Resting, Workout, Intense or Custom
 profile in the Inspector.
+
+For an immediate on-screen display, also add **Heart Rate Widget** to the same
+GameObject. It automatically subscribes to the client and shows the current BPM
+with a compact history graph. Its status indicator is red while offline, yellow
+while connecting, green for a live connection, and blue during simulation. The
+same connection colors appear in the setup window and client Inspector.
 
 The setup tool stores Editor test credentials under
 `Assets/HypeRateGenerated/Editor`, which it adds to the project's `.gitignore`.

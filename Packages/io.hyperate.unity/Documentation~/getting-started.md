@@ -62,8 +62,12 @@ var simulator = gameObject.AddComponent<HypeRateSimulator>();
 simulator.StartSimulation();
 ```
 
-The optional **Pulse Lab** Package Manager sample demonstrates the same workflow
-in a ready-to-run 3D scene.
+The optional **Heart Rate Widget** Package Manager sample demonstrates the same
+workflow in a ready-to-run scene. The widget is also available as the
+`HypeRateHeartRateWidget` component and can be added beside a client in any scene.
+Its connection indicator uses red for offline or errors, yellow while connecting
+or reconnecting, green for live data, and blue for simulated data. The setup
+window and custom client Inspector use the same status colors.
 
 ## Editor test credentials
 

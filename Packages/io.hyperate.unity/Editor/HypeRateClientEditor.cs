@@ -29,7 +29,7 @@ namespace HypeRate.SDK.Editor
             var client = (HypeRateClient)target;
             EditorGUILayout.Space(12f);
             EditorGUILayout.LabelField("Runtime Status", EditorStyles.boldLabel);
-            EditorGUILayout.LabelField("Connection", client.State.ToString());
+            HypeRateSetupWindow.DrawConnectionStatus(client.State);
             EditorGUILayout.LabelField("Heart Rate", client.CurrentHeartRate > 0 ? $"{client.CurrentHeartRate} BPM" : "—");
 
             if (!string.IsNullOrWhiteSpace(client.LastError))

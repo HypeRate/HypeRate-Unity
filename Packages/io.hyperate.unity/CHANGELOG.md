@@ -8,8 +8,11 @@
 - Added Unity Events and typed C# events for heart-rate updates.
 - Added an Editor-friendly heart-rate simulator with Resting, Workout, Intense,
   and Custom profiles.
-- Added the optional Pulse Lab 3D sample, with visuals and controls driven by the
-  same events used for live HypeRate data.
+- Added the optional Heart Rate Widget sample, with a compact BPM card and
+  history graph driven by the same events used for live HypeRate data.
+- Added consistent connection indicators to the widget, setup window, and
+  client Inspector: red while offline, yellow while connecting, and green when
+  connected. Simulation remains blue so it cannot be mistaken for live data.
 - Added Editor-only test credential handling, runtime configuration, documentation,
   sample code, and protocol tests.
 - Changed the public namespace to `HypeRate.SDK`.

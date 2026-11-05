@@ -71,5 +71,23 @@ namespace HypeRate.SDK.Tests
                 Object.DestroyImmediate(gameObject);
             }
         }
+
+        [Test]
+        public void WidgetAcceptsHeartRateValues()
+        {
+            var gameObject = new GameObject("HypeRate widget test");
+
+            try
+            {
+                var widget = gameObject.AddComponent<HypeRateHeartRateWidget>();
+                widget.PushHeartRate(96);
+
+                Assert.That(widget.CurrentHeartRate, Is.EqualTo(96));
+            }
+            finally
+            {
+                Object.DestroyImmediate(gameObject);
+            }
+        }
     }
 }

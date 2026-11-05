@@ -1,5 +1,5 @@
 {
-  "name": "HypeRate.SDK.Samples.PulseLab",
+  "name": "HypeRate.SDK.Samples.Widget",
   "rootNamespace": "HypeRate.SDK.Samples",
   "references": [
     "HypeRate.SDK"

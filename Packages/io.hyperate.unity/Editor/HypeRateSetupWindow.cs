@@ -114,7 +114,7 @@ namespace HypeRate.SDK.Editor
 
             if (!Application.isPlaying)
             {
-                EditorGUILayout.LabelField("Status", "Enter Play Mode to connect");
+                DrawConnectionStatus(HypeRateConnectionState.Disconnected, "Not running");
 
                 if (client != null && GUILayout.Button("Start Connection Test", GUILayout.Height(32f)))
                 {
@@ -130,7 +130,7 @@ namespace HypeRate.SDK.Editor
                 return;
             }
 
-            EditorGUILayout.LabelField("Status", client.State.ToString());
+            DrawConnectionStatus(client.State);
             EditorGUILayout.LabelField("Heart Rate", client.CurrentHeartRate > 0 ? $"{client.CurrentHeartRate} BPM" : "Waiting for data");
 
             if (!string.IsNullOrWhiteSpace(client.LastError))
@@ -148,6 +148,63 @@ namespace HypeRate.SDK.Editor
             else if (GUILayout.Button("Connect"))
             {
                 client.Connect();
+            }
+        }
+
+        internal static void DrawConnectionStatus(HypeRateConnectionState state, string overrideText = null)
+        {
+            GetStatusPresentation(state, out var text, out var color);
+            if (!string.IsNullOrWhiteSpace(overrideText))
+            {
+                text = overrideText;
+            }
+
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                EditorGUILayout.PrefixLabel("Status");
+                var dotStyle = new GUIStyle(EditorStyles.label)
+                {
+                    fontSize = 17,
+                    alignment = TextAnchor.MiddleCenter,
+                    normal = { textColor = color }
+                };
+                GUILayout.Label("●", dotStyle, GUILayout.Width(18f));
+                GUILayout.Label(text, EditorStyles.label);
+            }
+        }
+
+        private static void GetStatusPresentation(HypeRateConnectionState state, out string text, out Color color)
+        {
+            switch (state)
+            {
+                case HypeRateConnectionState.Connected:
+                    text = "Connected";
+                    color = new Color(0.18f, 0.82f, 0.35f);
+                    return;
+                case HypeRateConnectionState.Connecting:
+                    text = "Connecting";
+                    color = new Color(1f, 0.68f, 0.08f);
+                    return;
+                case HypeRateConnectionState.Reconnecting:
+                    text = "Reconnecting";
+                    color = new Color(1f, 0.68f, 0.08f);
+                    return;
+                case HypeRateConnectionState.Disconnecting:
+                    text = "Disconnecting";
+                    color = new Color(1f, 0.68f, 0.08f);
+                    return;
+                case HypeRateConnectionState.Simulating:
+                    text = "Simulation";
+                    color = new Color(0.18f, 0.58f, 1f);
+                    return;
+                case HypeRateConnectionState.Error:
+                    text = "Error";
+                    color = new Color(1f, 0.24f, 0.24f);
+                    return;
+                default:
+                    text = "Disconnected";
+                    color = new Color(1f, 0.24f, 0.24f);
+                    return;
             }
         }
 

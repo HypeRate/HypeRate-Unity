@@ -60,6 +60,23 @@ namespace HypeRate.SDK
         public string LastError { get; private set; } = string.Empty;
         public bool IsConnected => State == HypeRateConnectionState.Connected || simulationActive;
         public bool IsSimulating => simulationActive;
+        public bool HasConfiguration
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(runtimeApiToken) && !string.IsNullOrWhiteSpace(runtimeDeviceId))
+                {
+                    return true;
+                }
+
+#if UNITY_EDITOR
+                var editorSettings = HypeRateSettings.LoadEditorSettings();
+                return editorSettings != null && editorSettings.IsConfigured;
+#else
+                return false;
+#endif
+            }
+        }
         public HeartRateUnityEvent OnHeartRateChanged => onHeartRateChanged;
         public UnityEvent OnConnected => onConnected;
         public UnityEvent OnDisconnected => onDisconnected;
