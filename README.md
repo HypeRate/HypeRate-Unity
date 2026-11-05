@@ -71,6 +71,9 @@ https://github.com/HypeRate/HypeRate-Unity.git?path=/Packages/io.hyperate.unity#
 The package will also be available through the existing Unity Asset Store
 listing when version 2 is released.
 
+Prefer a file download? Every [GitHub Release](https://github.com/HypeRate/HypeRate-Unity/releases)
+includes a classic `.unitypackage` and a Unity Package Manager `.tgz` archive.
+
 ## Five-minute setup
 
 1. Open **Tools > HypeRate > Setup**.
