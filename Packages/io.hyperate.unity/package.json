@@ -10,12 +10,12 @@
     "url": "https://hyperate.io"
   },
   "license": "MIT",
-  "documentationUrl": "https://github.com/HypeRate/HypeRate-Unity/blob/master/Packages/io.hyperate.unity/Documentation~/getting-started.md",
-  "changelogUrl": "https://github.com/HypeRate/HypeRate-Unity/blob/master/Packages/io.hyperate.unity/CHANGELOG.md",
-  "licensesUrl": "https://github.com/HypeRate/HypeRate-Unity/blob/master/Packages/io.hyperate.unity/LICENSE.md",
+  "documentationUrl": "https://github.com/HypeRate/HypeRate-Unity-SDK/blob/master/Packages/io.hyperate.unity/Documentation~/getting-started.md",
+  "changelogUrl": "https://github.com/HypeRate/HypeRate-Unity-SDK/blob/master/Packages/io.hyperate.unity/CHANGELOG.md",
+  "licensesUrl": "https://github.com/HypeRate/HypeRate-Unity-SDK/blob/master/Packages/io.hyperate.unity/LICENSE.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HypeRate/HypeRate-Unity.git",
+    "url": "https://github.com/HypeRate/HypeRate-Unity-SDK.git",
     "directory": "Packages/io.hyperate.unity"
   },
   "keywords": [

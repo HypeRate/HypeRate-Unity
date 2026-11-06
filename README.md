@@ -58,20 +58,20 @@ In Unity, open **Window > Package Management > Package Manager**, click **+**,
 choose **Install package from git URL**, and enter:
 
 ```text
-https://github.com/HypeRate/HypeRate-Unity.git?path=/Packages/io.hyperate.unity
+https://github.com/HypeRate/HypeRate-Unity-SDK.git?path=/Packages/io.hyperate.unity
 ```
 
 For production, pin a tagged version instead of following the moving default
 branch:
 
 ```text
-https://github.com/HypeRate/HypeRate-Unity.git?path=/Packages/io.hyperate.unity#v2.0.0
+https://github.com/HypeRate/HypeRate-Unity-SDK.git?path=/Packages/io.hyperate.unity#v2.0.0
 ```
 
 The package will also be available through the existing Unity Asset Store
 listing when version 2 is released.
 
-Prefer a file download? Every [GitHub Release](https://github.com/HypeRate/HypeRate-Unity/releases)
+Prefer a file download? Every [GitHub Release](https://github.com/HypeRate/HypeRate-Unity-SDK/releases)
 includes a classic `.unitypackage` and a Unity Package Manager `.tgz` archive.
 
 ## Five-minute setup

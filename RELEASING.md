@@ -1,6 +1,6 @@
 # Releasing HypeRate for Unity
 
-The existing `HypeRate/HypeRate-Unity` repository is the canonical source for
+The existing `HypeRate/HypeRate-Unity-SDK` repository is the canonical source for
 both distribution channels. Runtime, Editor integration, documentation, tests,
 and samples live in `Packages/io.hyperate.unity`.
 
@@ -32,7 +32,7 @@ the version in `package.json` and the heading in `CHANGELOG.md` in sync.
 Consumers install the tagged package with:
 
 ```text
-https://github.com/HypeRate/HypeRate-Unity.git?path=/Packages/io.hyperate.unity#v2.0.0
+https://github.com/HypeRate/HypeRate-Unity-SDK.git?path=/Packages/io.hyperate.unity#v2.0.0
 ```
 
 ## Asset Store package
